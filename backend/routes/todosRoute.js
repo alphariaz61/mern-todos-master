@@ -13,7 +13,6 @@ router.get("/me", verifyToken, async (req, res) => {
 router.post("/", verifyToken, async (req, res) => {
     try {
         const todo = new Todo({ ...req.body, userID : req.user._id })
-        console.log("todo", todo)
         await todo.save()
         res.status(201).send(todo)
     } catch ({ message }) { res.status(400).send(message) }
@@ -24,13 +23,11 @@ router.put("/:id", verifyToken, async (req, res) => {
     const { userID, ...updateObj } = req.body//extract the userID
     try {
         const updated = await Todo.findOneAndUpdate(query, updateObj)
-        console.log(updated)
         res.send(updated)
     } catch ({ message }) { res.status(400).send(message) }
 })
 
 router.delete("/me", verifyToken, async (req, res) => {
-    console.log(req.user._id)
     try {
         await Todo.deleteMany({ userID : req.user._id})
         res.status(204).send()

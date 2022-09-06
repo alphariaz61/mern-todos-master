@@ -17,7 +17,7 @@ app.use(express.static(__dirname.replace("/backend", "") + "/client/build"))
 app.get("*", (_, res) => res.sendFile(__dirname.replace("/backend", "") + "/client/build/index.html"))
 
 // Start Server
-app.listen(5000, () => {
+app.listen(process.env.PORT || 5000, () => {
     console.log("Server Started".cyan.bold.underline)
     connectDB()
 })

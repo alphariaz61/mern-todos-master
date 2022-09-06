@@ -6,8 +6,6 @@ import ProtectedRoute from "./components/ProtectedRoute"
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer"
 
-// Make sure to add React toastify https://fkhadra.github.io/react-toastify/introduction/
-
 export default function App () {
     return (
         <div className="wrapper bg-dark text-white">

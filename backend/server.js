@@ -5,14 +5,14 @@ require("colors")
 require("dotenv").config({ path : "backend/config.env" })
 const connectDB = require("./scripts/database")
 
-// jsoon body parser
+// Body Parser Middleware
 app.use(express.json())
 
 // Routes
 app.use("/api/users", require("./routes/usersRoute"))
 app.use("/api/todos", require("./routes/todosRoute"))
 
-// serve frontend folder
+// Server Client App
 app.use(express.static("client/build"))
 app.get("*", (_, res) => res.sendFile(__dirname.replace("/backend", "") + "/client/build/index.html"))
 

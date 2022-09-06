@@ -13,7 +13,7 @@ app.use("/api/users", require("./routes/usersRoute"))
 app.use("/api/todos", require("./routes/todosRoute"))
 
 // Server Client App
-app.use(express.static("client/build"))
+app.use(express.static(__dirname.replace("/backend", "") + "/client/build"))
 app.get("*", (_, res) => res.sendFile(__dirname.replace("/backend", "") + "/client/build/index.html"))
 
 // Start Server

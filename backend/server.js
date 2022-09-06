@@ -18,6 +18,6 @@ app.get("*", (_, res) => res.sendFile(__dirname.replace("/backend", "") + "/clie
 
 // Start Server
 app.listen(5000, () => {
-    console.log("Server Started....".cyan.bold.underline)
+    console.log("Server Started".cyan.bold.underline)
     connectDB()
 })

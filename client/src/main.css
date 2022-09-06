@@ -1,0 +1,46 @@
+/* Main CSS */
+.wrapper {
+    min-height: 100vh;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+/* List */
+#list {
+    max-height: 300px;
+    overflow: scroll;
+}
+
+/* OverLay */
+#overlay {
+    padding: 100px;
+    padding-top: 200px;
+    background-color: black;
+    opacity: 0.5;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    text-align: center;
+    z-index: 10000;
+    font-family: monospace;
+}
+
+#overlay .spinner-border {
+    min-width: 10vw;
+    min-height: 10vw;
+    font-size: 30px;    
+}   
+
+/* Footer */
+#footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    border-top: 1px solid #4b414191;
+}
+

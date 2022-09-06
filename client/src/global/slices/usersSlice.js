@@ -48,7 +48,8 @@ const registerAndLoginFulfilled = (state, { payload:user }) => {
     console.log("authentication fulfilled!", user)
 }
 
-const registerAndLoginRejected = (state) => {
+const registerAndLoginRejected = (state, { payload:errorMessage }) => {
+    alert(errorMessage)
     state.isLoading = false
-    console.log("auth rejected!")
+    console.log("auth rejected!", errorMessage)
 }

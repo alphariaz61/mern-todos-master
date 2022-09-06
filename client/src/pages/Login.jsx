@@ -17,8 +17,7 @@ export default function Login () {
         dispatch(userThunks.login(form)).unwrap().then(() => nav("/"))
     }
 
-    if (isLoading) return <Overlay text="Logging In..."/>
-
+    if (isLoading) return <Overlay text="Logging In"/>
     return (
         <div className="row text-white pt-5">
             <div className="col-12 col-lg-6 mx-auto">

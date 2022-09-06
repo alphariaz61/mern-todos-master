@@ -19,8 +19,7 @@ export default function Register () {
         dispatch(userThunks.register(rest)).unwrap().then(() => nav("/"))
     }
 
-    if (isLoading) return <Overlay text="Registering..."/>
-
+    if (isLoading) return <Overlay text="Creating Account"/>
     return (
         <div className="row text-white pt-5">
             <div className="col-12 col-lg-6 mx-auto">

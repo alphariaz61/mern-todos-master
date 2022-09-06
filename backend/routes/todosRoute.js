@@ -24,7 +24,7 @@ router.put("/:id", verifyToken, async (req, res) => {
     try {
         const updated = await Todo.findOneAndUpdate(query, updateObj)
         res.send(updated)
-    } catch ({ message }) { res.status(400).send(message) }
+    } catch ({ message }) { res.status(404).send(message) }
 })
 
 router.delete("/me", verifyToken, async (req, res) => {

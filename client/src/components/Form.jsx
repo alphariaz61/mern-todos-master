@@ -7,10 +7,8 @@ export default function Form () {
     const [text, setText] = useState("")
 
     const onClick = () => {
-        dispatch(todosThunks.createTodo({ text, isComplete : false })).unwrap().then(() => {
-            console.log("unwrapped and fulfilled")
-            setText("")
-        })
+        dispatch(todosThunks.createTodo({ text, isComplete : false }))
+        setText("")
     }
 
     return (
@@ -21,7 +19,7 @@ export default function Form () {
                     value={text}
                     onChange={(e) => setText(e.target.value)}
                     className="form-control rounded-0" 
-                    placeholder="Add Item Text Here"
+                    placeholder="Add Todo Text Here"
                 />
                 <button 
                     onClick={onClick} 

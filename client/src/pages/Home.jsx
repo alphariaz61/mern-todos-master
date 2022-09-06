@@ -10,7 +10,7 @@ export default function Home () {
     useEffect(() => { dispatch(todosThunks.fetchTodos()) }, [numDispatches])
     return (
         <div className="row">
-            <div className="col-12 col-lg-8 col-xl-6 mx-auto mt-5 p-5 border border-light rounded">
+            <div className="col-12 col-lg-8 col-xl-6 mx-auto mt-5 p-5 border border-secondary rounded">
                 <Form />
                 <List />         
             </div>  

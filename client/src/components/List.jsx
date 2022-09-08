@@ -2,17 +2,22 @@ import { useDispatch, useSelector } from "react-redux"
 import { thunks as todosThunks } from "../global/slices/todosSlice"
 import Empty from "./Empty"
 import Icon from "./Icon"
+import TodoText from "./TodoText"
 
 export default function List () {
     const dispatch = useDispatch()
     const { todos, isLoading } = useSelector((s) => s.todos)
-    
-    const updateTodo = (todo, update) => {
-        dispatch(todosThunks.updateTodo({ ...todo, ...update }))
-    }
 
     const deleteTodo = (todo) => {
         if (window.confirm("Delete This Item?")) dispatch(todosThunks.deleteTodo(todo))
+    }
+
+    const updateTodoText = (todo) => {
+        dispatch(todosThunks.updateTodo({ ...todo, text : prompt("Update Text:", todo.text) }))
+    }
+
+    const updateTodoIsComplete = (todo) => {
+        dispatch(todosThunks.updateTodo({ ...todo, isComplete : !todo.isComplete }))
     }
     
     if ((todos.length === 0) && !isLoading) return <Empty/>
@@ -20,18 +25,13 @@ export default function List () {
         <ul id="list" className="list-group rounded-0 pb-3">
             {todos.map((todo) => (
                 <li key={todo._id} className="list-group-item d-flex justify-content-between align-items-center">
-                    <span 
-                        onClick={() => updateTodo(todo, { isComplete : !todo.isComplete })}  
-                        className={todo.isComplete ? "text-decoration-line-through" : ""}
-                    >
-                        {todo.text}
-                    </span>
+                    <TodoText todo={todo} updateTodoIsComplete={updateTodoIsComplete} />
                     <div>
                         <Icon 
-                            onClick={() => updateTodo(todo, { text : prompt("Update Text:", todo.text) })} 
-                            classes={["me-3"]} 
+                            onClick={() => updateTodoText(todo)} 
                             type="pencil-square" 
                             color="warning" 
+                            classes={["me-3"]} 
                         />
                         <Icon 
                             onClick={() => deleteTodo(todo)} 

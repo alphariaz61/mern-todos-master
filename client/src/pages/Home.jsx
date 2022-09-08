@@ -7,12 +7,12 @@ import { useDispatch, useSelector } from "react-redux";
 export default function Home () {
     const dispatch = useDispatch()
     const { numDispatches } = useSelector(s => s.todos)
-    useEffect(() => { dispatch(todosThunks.fetchTodos()) }, [numDispatches])
+    useEffect(() => { dispatch(todosThunks.fetchTodos()) }, [numDispatches, dispatch])
     return (
         <div className="row">
             <div className="col-12 col-lg-8 col-xl-6 mx-auto mt-5 p-5 border border-secondary rounded">
-                <Form />
-                <List />         
+                <Form/>
+                <List/>         
             </div>  
         </div>
     )

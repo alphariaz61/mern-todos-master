@@ -20,7 +20,7 @@ router.post("/", verifyToken, async (req, res) => {
 
 router.put("/:id", verifyToken, async (req, res) => {
     const query = { userID : req.user._id, _id : req.params.id}
-    const { userID, ...updateObj } = req.body//extract the userID
+    const { userID, ...updateObj } = req.body//don't allow userID to be updated
     try {
         const updated = await Todo.findOneAndUpdate(query, updateObj)
         res.send(updated)

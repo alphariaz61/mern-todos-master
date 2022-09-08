@@ -5,9 +5,11 @@ require("colors")
 require("dotenv").config({ path : "backend/config.env" })
 const connectDB = require("./scripts/database")
 const setStatic = require("./scripts/setStatic")
+const delay = require("./middlewares/delay")
 
-// Body Parser Middleware
+// Middleware
 app.use(express.json())
+// app.use(delay)
 
 // Routes
 app.use("/api/users", require("./routes/usersRoute"))

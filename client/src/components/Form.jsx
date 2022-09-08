@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { thunks as todosThunks } from "../global/slices/todosSlice"
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 
 export default function Form () {
     const dispatch = useDispatch()
@@ -8,7 +8,7 @@ export default function Form () {
 
     const onClick = () => {
         dispatch(todosThunks.createTodo({ text, isComplete : false }))
-        setText("")
+            .unwrap().then(() =>  setText(""))
     }
 
     return (

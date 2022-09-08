@@ -1,10 +1,11 @@
 import { useDispatch, useSelector } from "react-redux"
 import { thunks as todosThunks } from "../global/slices/todosSlice"
+import Empty from "./Empty"
 import Icon from "./Icon"
 
 export default function List () {
     const dispatch = useDispatch()
-    const { todos } = useSelector((s) => s.todos)
+    const { todos, isLoading } = useSelector((s) => s.todos)
     
     const updateTodo = (todo, update) => {
         dispatch(todosThunks.updateTodo({ ...todo, ...update }))
@@ -14,7 +15,7 @@ export default function List () {
         if (window.confirm("Delete This Item?")) dispatch(todosThunks.deleteTodo(todo))
     }
     
-    if (todos.length === 0) return <p className="text-center fs-3 mt-5">Nothing In My Todo List</p>
+    if ((todos.length === 0) && !isLoading) return <Empty/>
     return (
         <ul id="list" className="list-group rounded-0 pb-3">
             {todos.map((todo) => (

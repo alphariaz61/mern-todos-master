@@ -24,7 +24,8 @@ export const { reducer, actions } = createSlice({
     name : "todos",
     initialState : { 
         todos : [], 
-        numDispatches : 0 
+        numDispatches : 0,
+        isLoading : false
     },
     reducers : {
         clearTodos (state) {
@@ -33,8 +34,11 @@ export const { reducer, actions } = createSlice({
         }
     },
     extraReducers ({addCase}) {
+        addCase(thunks.fetchTodos.pending, (state) => { state.isLoading = true })
+        addCase(thunks.fetchTodos.rejected, (state) => { state.isLoading = false })
         addCase(thunks.fetchTodos.fulfilled, (state, {payload:todos}) => {
             state.todos = todos
+            state.isLoading = false
         })
         addCase(thunks.createTodo.rejected, (state, {payload:todos}) => { 
             alert("Unable To Add Todo") 

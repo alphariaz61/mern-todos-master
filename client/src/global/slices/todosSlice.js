@@ -23,9 +23,7 @@ export const thunks = {
 export const { reducer, actions } = createSlice({
     name : "todos",
     initialState : { 
-        todos : [], 
-        numDispatches : 0,
-        isLoading : false
+        todos : [], numDispatches : 0, isLoading : false
     },
     reducers : {
         clearTodos (state) {
@@ -40,19 +38,26 @@ export const { reducer, actions } = createSlice({
             state.todos = todos
             state.isLoading = false
         })
-        addCase(thunks.createTodo.rejected, (state, {payload:todos}) => { 
-            alert("Unable To Add Todo") 
+        Array.from(tinyActions.methods).forEach((n) => {
+            addCase(thunks[n].pending, tinyActions.pending)// Fulfilled Cases
+            addCase(thunks[n].fulfilled, tinyActions.fulfilled)// Fulfilled Cases
+            addCase(thunks[n].rejected, tinyActions.rejected)// Rejected Cases
         })
-        addCase(thunks.createTodo.fulfilled, incrementCount)
-        addCase(thunks.updateTodo.fulfilled, incrementCount)
-        addCase(thunks.deleteTodo.fulfilled, incrementCount)
-        addCase(thunks.deleteAll.fulfilled, incrementCount)
-        // Rejected Cases
-        addCase(thunks.updateTodo.rejected, rejectedPromise)
-        addCase(thunks.deleteTodo.rejected, rejectedPromise)
-        addCase(thunks.deleteAll.rejected, rejectedPromise)
     }
 })
 
-const incrementCount = (s) => { s.numDispatches++ }
-const rejectedPromise = (s, a) => { alert("Network Error") }
+const tinyActions = {
+    methods : ["createTodo", "updateTodo", "deleteTodo", "deleteAll"],
+    pending(state) {
+        state.isLoading = true
+    },
+    fulfilled (state) {
+        state.numDispatches++
+        state.isLoading = false
+    },
+    rejected (state) {
+        state.isLoading = false
+        alert("Network Error")
+    }
+}
+

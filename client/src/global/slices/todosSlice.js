@@ -38,15 +38,16 @@ export const { reducer, actions } = createSlice({
             state.todos = todos
             state.isLoading = false
         })
-        Array.from(tinyActions.methods).forEach((n) => {
-            addCase(thunks[n].pending, tinyActions.pending)// Fulfilled Cases
-            addCase(thunks[n].fulfilled, tinyActions.fulfilled)// Fulfilled Cases
-            addCase(thunks[n].rejected, tinyActions.rejected)// Rejected Cases
+        Array.from(helper.methods).forEach((n) => {
+            const current = thunks[n]
+            addCase(current.pending, helper.pending)// Fulfilled Cases
+            addCase(current.fulfilled, helper.fulfilled)// Fulfilled Cases
+            addCase(current.rejected, helper.rejected)// Rejected Cases
         })
     }
 })
 
-const tinyActions = {
+const helper = {
     methods : ["createTodo", "updateTodo", "deleteTodo", "deleteAll"],
     pending(state) {
         state.isLoading = true

@@ -24,29 +24,30 @@ export const { reducer, actions } = createSlice({
         }
     },
     extraReducers ({addCase}) {
-        Array.from(["login", "register"]).forEach((n) => {
+        Array.from().forEach((n) => {
             const current = thunks[n]
-            addCase(current.pending, registerAndLoginPending)// Pending
-            addCase(current.fulfilled, registerAndLoginFulfilled)// Fulfilled
-            addCase(current.rejected, registerAndLoginRejected)// Rejected
+            addCase(current.pending, helper.registerAndLoginPending)// Pending
+            addCase(current.fulfilled, helper.registerAndLoginFulfilled)// Fulfilled
+            addCase(current.rejected, helper.registerAndLoginRejected)// Rejected
         })
     }
 })
 
-const registerAndLoginPending = (state) => {
-    state.isLoading = true
-    console.log("Auth Pending!")
-}
-
-const registerAndLoginFulfilled = (state, { payload:user }) => {
-    state.isLoading = false
-    state.user = user
-    window.localStorage.setItem("user", JSON.stringify(user))
-    console.log("Auth Fulfilled", user)
-}
-
-const registerAndLoginRejected = (state, { payload:errorMessage }) => {
-    alert(errorMessage || "Auth Rejected")
-    state.isLoading = false
-    console.log("Auth Rejected", errorMessage)
+const helper = {
+    methods : ["login", "register"],
+    registerAndLoginPending(state) {
+        state.isLoading = true
+        console.log("Auth Pending!")
+    },
+    registerAndLoginFulfilled(state, { payload:user }) {
+        state.isLoading = false
+        state.user = user
+        window.localStorage.setItem("user", JSON.stringify(user))
+        console.log("Auth Fulfilled", user)
+    },
+    registerAndLoginRejected(state, { payload:errorMessage }) {
+        alert(errorMessage || "Auth Rejected")
+        state.isLoading = false
+        console.log("Auth Rejected", errorMessage)
+    }
 }

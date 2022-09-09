@@ -9,7 +9,7 @@ const delay = require("./middlewares/delay")
 
 // Middleware
 app.use(express.json())
-app.use(delay(2))
+app.use(delay(0))
 
 // Routes
 app.use("/api/users", require("./routes/usersRoute"))

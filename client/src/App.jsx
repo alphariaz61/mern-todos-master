@@ -9,7 +9,7 @@ import Footer from "./components/Footer"
 export default function App () {
     return (
         <div className="wrapper bg-dark text-white">
-            <Navbar/>
+            <Navbar title="Mern Todos"/>
             <div className="container">
                 <Routes>
                     <Route path="/" element={<ProtectedRoute><Home/></ProtectedRoute>}/>

@@ -28,15 +28,36 @@ export default function Register () {
                     <div className="row gy-4">
                         <div className="col-12">
                             <label className="form-label">Email</label>
-                            <input onChange={onFormChange} value={form.email} name="email" type="email" className="form-control" placeholder="john@gmail.com"/>
+                            <input 
+                                onChange={onFormChange} 
+                                value={form.email} 
+                                name="email" 
+                                type="email" 
+                                className="form-control" 
+                                placeholder="john@gmail.com"
+                            />
                         </div>
                         <div className="col-12">
                             <label className="form-label">Password</label>
-                            <input onChange={onFormChange} value={form.password} name="password" type="password" className="form-control" placeholder="smith123"/>
+                            <input 
+                                onChange={onFormChange} 
+                                value={form.password} 
+                                name="password" 
+                                type="password" 
+                                className="form-control" 
+                                placeholder="smith123"
+                            />
                         </div>
                         <div className="col-12">
                             <label className="form-label">Confirm Password</label>
-                            <input onChange={onFormChange} value={form.confirm} name="confirm" type="password" className="form-control" placeholder="smith123"/>
+                            <input 
+                                onChange={onFormChange} 
+                                value={form.confirm}
+                                name="confirm" 
+                                type="password" 
+                                className="form-control" 
+                                placeholder="smith123"
+                            />
                         </div>
                     </div>
                     <span onClick={() => nav("/login")} className="text-success my-3 h6 d-block text-center pointer">

@@ -38,7 +38,7 @@ export const { reducer, actions } = createSlice({
             state.todos = todos
             state.isLoading = false
         })
-        Array.from(helper.methods).forEach((n) => {
+        helper.methods.forEach((n) => {
             const current = thunks[n]
             addCase(current.pending, helper.pending)// Fulfilled Cases
             addCase(current.fulfilled, helper.fulfilled)// Fulfilled Cases
@@ -55,10 +55,11 @@ const helper = {
     fulfilled (state) {
         state.numDispatches++
         state.isLoading = false
+        console.log("fulfilled")
     },
-    rejected (state) {
+    rejected (state, { payload:errorMessage }) {
         state.isLoading = false
-        alert("Network Error")
+        alert(errorMessage)
     }
 }
 

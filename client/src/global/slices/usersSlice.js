@@ -24,7 +24,7 @@ export const { reducer, actions } = createSlice({
         }
     },
     extraReducers ({addCase}) {
-        Array.from(helper.methods).forEach((n) => {
+        helper.methods.forEach((n) => {
             const current = thunks[n]
             addCase(current.pending, helper.registerAndLoginPending)// Pending
             addCase(current.fulfilled, helper.registerAndLoginFulfilled)// Fulfilled

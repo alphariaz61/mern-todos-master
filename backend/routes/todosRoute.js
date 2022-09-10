@@ -1,6 +1,7 @@
 const express = require("express")
 const router = express.Router()
 const verifyToken = require("../middlewares/verifyToken")
+const verifyMyTodo = require("../middlewares/verifyMyTodo")
 const Todo = require("../models/Todo")
 
 router.get("/me", verifyToken, async (req, res) => {
@@ -18,11 +19,10 @@ router.post("/", verifyToken, async (req, res) => {
     } catch ({ message }) { res.status(400).send(message) }
 })
 
-router.put("/:id", verifyToken, async (req, res) => {
-    const query = { userID : req.user._id, _id : req.params.id}
-    const { userID, ...updateObj } = req.body//don't allow userID to be updated
+router.put("/:id", verifyToken, verifyMyTodo, async (req, res) => {
     try {
-        const updated = await Todo.findOneAndUpdate(query, updateObj)
+        ["isComplete", "text"].forEach((prop) => req.todo[prop] = req.body[prop])
+        const updated = await req.todo.save()
         res.send(updated)
     } catch ({ message }) { res.status(404).send(message) }
 })
@@ -31,15 +31,14 @@ router.delete("/me", verifyToken, async (req, res) => {
     try {
         await Todo.deleteMany({ userID : req.user._id})
         res.status(204).send()
-    } catch ({ message }) { res.status(404).send(message) } 
+    } catch ({ message }) { res.status(400).send(message) } 
 })
 
-router.delete("/:id", verifyToken, async (req, res) => {
+router.delete("/:id", verifyToken, verifyMyTodo, async (req, res) => {
     try {
-        const result = await Todo.findOneAndRemove({ userID : req.user._id, _id : req.params.id })
-        if (!result) throw new Error("Didn't Find Anything With That ID")
-        res.status(204).send(result)
-    } catch ({ message }) { res.status(404).send(message) }
+        await req.todo.remove()
+        res.status(204).send()
+    } catch ({ message }) { res.status(400).send(message) }
 })
 
 

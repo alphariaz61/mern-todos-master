@@ -12,6 +12,7 @@ export default function App () {
             <Navbar title="Mern Todos"/>
             <div className="container">
                 <Routes>
+                    <Route path='*' element={<Login />} />
                     <Route path="/" element={<ProtectedRoute><Home/></ProtectedRoute>}/>
                     <Route path="/login" element={<Login/>}/>
                     <Route path="/register" element={<Register/>}/>

@@ -9,7 +9,5 @@ module.exports = async function (req, res, next) {
         const { _id } = jwt.verify(token, process.env.JWT_SECRET)
         req.user = await User.findOne({ _id })
         next()
-    } catch (error) {
-        return res.status(403).send({ message : error.message})
-    }
+    } catch ({message}) { res.status(403).send({ message}) }
 }

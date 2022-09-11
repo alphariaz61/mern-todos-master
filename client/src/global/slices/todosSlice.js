@@ -55,7 +55,6 @@ const helper = {
     fulfilled (state) {
         state.numDispatches++
         state.isLoading = false
-        console.log("fulfilled")
     },
     rejected (state, { payload:errorMessage }) {
         state.isLoading = false

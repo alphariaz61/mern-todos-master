@@ -1,10 +1,11 @@
 import { useState } from "react"
 import { thunks as todosThunks } from "../global/slices/todosSlice"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 
 export default function Form () {
     const dispatch = useDispatch()
     const [text, setText] = useState("")
+    const { isLoading } = useSelector(s => s.todos)
 
     const onClick = () => {
         dispatch(todosThunks.createTodo({ text, isComplete : false }))
@@ -20,6 +21,7 @@ export default function Form () {
                     onChange={(e) => setText(e.target.value)}
                     className="form-control rounded-0" 
                     placeholder="Add Todo Here"
+                    disabled={isLoading && (text.length > 0)}
                 />
                 <button 
                     onClick={onClick} 

@@ -3,9 +3,7 @@ const router = express.Router()
 const User = require("../models/User")
 const { hashSync, genSaltSync, compareSync} = require('bcryptjs')
 const { isEmail } = require("validator")
-const createToken = require("../scripts/createToken")
-
-const createResObject = ({_id, email}) => ({ token : createToken({ _id }), email})
+const createAuthResObj = require("../scripts/createAuthResObj")
 
 router.post("/register", async (req, res) => {
     try {
@@ -15,8 +13,8 @@ router.post("/register", async (req, res) => {
         const user = new User (req.body)// Create instance of User
         user.password = hashSync(user.password, genSaltSync(+process.env.SALT_ROUNDS))// Hash the password
         await user.save()// Save In DB
-        res.send(createResObject(user))//Send back the jwt
-    } catch ({message}) { res.status(400).send(message) }
+        res.send(createAuthResObj(user))//Send back the jwt
+    } catch ({message}) { res.status(400).send({message}) }
 })
 
 router.post("/login", async (req, res) => {
@@ -25,9 +23,8 @@ router.post("/login", async (req, res) => {
         if (!user) throw new Error ("No User Found")
         const passwordIsValid = compareSync(req.body.password, user.password)
         if (!passwordIsValid) throw new Error ("Invalid Password!")
-        res.send(createResObject(user)) // Send back the jwt
-    } catch ({message}) { res.status(400).send(message) }
+        res.send(createAuthResObj(user)) // Send back the jwt
+    } catch ({message}) { res.status(400).send({message}) }
 })
-
 
 module.exports = router

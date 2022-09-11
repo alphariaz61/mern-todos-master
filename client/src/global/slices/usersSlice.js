@@ -37,17 +37,14 @@ const helper = {
     methods : ["login", "register"],
     registerAndLoginPending(state) {
         state.isLoading = true
-        console.log("Auth Pending!")
     },
     registerAndLoginFulfilled(state, { payload:user }) {
         state.isLoading = false
         state.user = user
         window.localStorage.setItem("user", JSON.stringify(user))
-        console.log("Auth Fulfilled", user)
     },
     registerAndLoginRejected(state, { payload:errorMessage }) {
         alert(errorMessage || "Auth Rejected")
         state.isLoading = false
-        console.log("Auth Rejected", errorMessage)
     }
 }

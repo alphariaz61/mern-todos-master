@@ -16,7 +16,7 @@ router.post("/register", async (req, res) => {
         user.password = hashSync(user.password, genSaltSync(+process.env.SALT_ROUNDS))// Hash the password
         await user.save()// Save In DB
         res.send(createResObject(user))//Send back the jwt
-    } catch ({message}) { res.status(400).send({ message }) }
+    } catch ({message}) { res.status(400).send(message) }
 })
 
 router.post("/login", async (req, res) => {
@@ -26,7 +26,7 @@ router.post("/login", async (req, res) => {
         const passwordIsValid = compareSync(req.body.password, user.password)
         if (!passwordIsValid) throw new Error ("Invalid Password!")
         res.send(createResObject(user)) // Send back the jwt
-    } catch ({message}) { res.status(400).send({ message }) }
+    } catch ({message}) { res.status(400).send(message) }
 })
 
 

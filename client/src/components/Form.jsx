@@ -19,7 +19,7 @@ export default function Form () {
                     value={text}
                     onChange={(e) => setText(e.target.value)}
                     className="form-control rounded-0" 
-                    placeholder="Add Todo Text Here"
+                    placeholder="Add Todo Here"
                 />
                 <button 
                     onClick={onClick} 

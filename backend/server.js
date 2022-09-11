@@ -3,7 +3,7 @@ const express = require("express")
 const app = express()
 require("colors")
 require("dotenv").config({ path : "backend/config.env" })
-const connectDB = require("./scripts/database")
+const connectDB = require("./scripts/connectDB")
 const setStatic = require("./scripts/setStatic")
 const delay = require("./middlewares/delay")
 

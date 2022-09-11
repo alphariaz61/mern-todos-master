@@ -13,15 +13,12 @@ export default function LogoutButton () {
         dispatch(todosActions.clearTodos())
         nav("/login")
     }
-
-    const title = `Logged in as ${user?.email}`
-
-    if (!user) return <></>//don't render if there is no user
+    if (!user) return <></>
     return (
         <button        
             className="btn text-success fw-bolder"
             onClick={logout}
-            title={title}
+            title={`Logged in as ${user?.email}`}
         >
             Logout 
         </button>

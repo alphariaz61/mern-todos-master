@@ -39,10 +39,9 @@ export const { reducer, actions } = createSlice({
             state.isLoading = false
         })
         helper.methods.forEach((n) => {
-            const current = thunks[n]
-            addCase(current.pending, helper.pending)// Fulfilled Cases
-            addCase(current.fulfilled, helper.fulfilled)// Fulfilled Cases
-            addCase(current.rejected, helper.rejected)// Rejected Cases
+            addCase(thunks[n].pending, helper.pending)// Fulfilled Cases
+            addCase(thunks[n].fulfilled, helper.fulfilled)// Fulfilled Cases
+            addCase(thunks[n].rejected, helper.rejected)// Rejected Cases
         })
     }
 })

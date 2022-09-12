@@ -25,10 +25,9 @@ export const { reducer, actions } = createSlice({
     },
     extraReducers ({addCase}) {
         helper.methods.forEach((n) => {
-            const current = thunks[n]
-            addCase(current.pending, helper.registerAndLoginPending)// Pending
-            addCase(current.fulfilled, helper.registerAndLoginFulfilled)// Fulfilled
-            addCase(current.rejected, helper.registerAndLoginRejected)// Rejected
+            addCase(thunks[n].pending, helper.registerAndLoginPending)// Pending
+            addCase(thunks[n].fulfilled, helper.registerAndLoginFulfilled)// Fulfilled
+            addCase(thunks[n].rejected, helper.registerAndLoginRejected)// Rejected
         })
     }
 })

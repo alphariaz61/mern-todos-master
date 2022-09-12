@@ -13,7 +13,8 @@ export default function List () {
             if (window.confirm(`Delete Item #${index+1}`)) dispatch(todosThunks.deleteTodo(todo))
         },
         updateTodoText(todo) {
-            dispatch(todosThunks.updateTodo({ ...todo, text : prompt("Update Text:", todo.text) }))
+            const text = prompt("Update Text:", todo.text)
+            if (text) dispatch(todosThunks.updateTodo({ ...todo, text }))
         },
         updateTodoIsComplete(todo) {
             dispatch(todosThunks.updateTodo({ ...todo, isComplete : !todo.isComplete }))
@@ -24,7 +25,10 @@ export default function List () {
     return (
         <ul id="list" className="list-group rounded-0 pb-3">
             {todos.map((todo, index) => (
-                <li key={todo._id} className="list-group-item d-flex justify-content-between align-items-center">
+                <li 
+                    key={todo._id} 
+                    className="list-group-item d-flex justify-content-between align-items-center"
+                >
                     <TodoText todo={todo} updateTodoIsComplete={funcs.updateTodoIsComplete} />
                     <div>
                         <Icon 

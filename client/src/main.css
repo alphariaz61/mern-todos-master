@@ -13,6 +13,21 @@
     overflow: scroll;
 }
 
+#todo-text {
+    max-width: 85%;
+    overflow: scroll;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+#todo-text::-webkit-scrollbar {
+    display: none;
+}
+
+@media only screen and (max-width: 600px) {
+    #todo-text { max-width: 70%; }
+}
+
 /* OverLay */
 #overlay {
     padding: 100px;

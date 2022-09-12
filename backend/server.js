@@ -11,7 +11,7 @@ const [PORT, isInProduction] = getProdDetails(5000)
 
 // Middleware
 app.use(express.json())
-app.use(delay( isInProduction ? 0 : 1 ))//only delay in dev
+app.use(delay(isInProduction ? 0 : 0.5 ))//only delay in dev
 
 // Routes
 app.use("/api/users", require("./routes/usersRoute"))

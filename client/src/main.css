@@ -17,7 +17,7 @@
     max-width: 85%;
     overflow: scroll;
     white-space: nowrap;
-    text-overflow: ellipsis;
+    /*text-overflow: ellipsis;*/
 }
 
 #todo-text::-webkit-scrollbar {

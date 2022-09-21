@@ -30,14 +30,14 @@ router.put("/:id", verifyToken, verifyMyTodo, async (req, res) => {
 router.delete("/me", verifyToken, async (req, res) => {
     try {
         await Todo.deleteMany({ userID : req.user._id})
-        res.status(204).send()
+        res.send()
     } catch ({ message }) { res.status(400).send({message}) } 
 })
 
 router.delete("/:id", verifyToken, verifyMyTodo, async (req, res) => {
     try {
         await req.todo.remove()
-        res.status(204).send()
+        res.send()
     } catch ({ message }) { res.status(400).send({message}) }
 })
 

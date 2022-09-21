@@ -1,6 +1,4 @@
-const createToken = require("./createToken")
-
-module.exports = function createResObject ({_id, email}) {
-    return ({ token : createToken({ _id }), email})
-
+module.exports = function createAuthResObject ({ email, _id }) {
+    const token = jwt.sign({ _id }, process.env.JWT_SECRET)
+    return ({ token, email })
 }
